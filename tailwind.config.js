@@ -6,7 +6,17 @@ export default {
       "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+            Roboto: ['Roboto', 'sans-serif'],
+            Poppins: ['Poppins', 'sans-serif']
+        },
+        colors: {
+            primaryGreen: '#56B280',
+            primaryBlack: '#272727',
+            primaryWhite: '#FFFFFF'
+        }
+    },
   },
   plugins: [],
 }
