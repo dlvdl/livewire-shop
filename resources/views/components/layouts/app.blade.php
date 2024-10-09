@@ -21,6 +21,8 @@
 
         <main class="bg-primaryWhite h-full">
             {{ $slot }}
+
+            @yield('content')
         </main>
 
         <div class="bg-primaryBlack">

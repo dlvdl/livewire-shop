@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\HomePageController;
 
-Route::get('/', \App\Livewire\Test::class);
+Route::get('/', [HomePageController::class, 'index'])->name('home');
 
