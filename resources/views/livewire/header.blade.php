@@ -1,4 +1,4 @@
-<div class="w-full flex items-center justify-between font-Roboto font-medium text-black max-w-2xl px-6 lg:max-w-7xl mx-auto">
+<div class="w-full flex items-center justify-between font-Roboto font-medium text-black max-w-2xl p-6 lg:max-w-7xl mx-auto">
     <div>
         <svg class="w-[120px] h-[34px]">
             <use xlink:href="/icons.svg#logo-header"></use>
@@ -18,13 +18,13 @@
         </ul>
     </nav>
     <div class="flex gap-4">
-        <button class="w-6 h-6">
-            <svg class="w-[60px] h-[60px]">
+        <button>
+            <svg class="w-7 h-7">
                 <use xlink:href="/icons.svg#profile"></use>
             </svg>
         </button>
-        <button class="w-6 h-6">
-            <svg class="w-[60px] h-[60px]">
+        <button>
+            <svg class="w-7 h-7">
                 <use xlink:href="/icons.svg#cart"></use>
             </svg>
         </button>
