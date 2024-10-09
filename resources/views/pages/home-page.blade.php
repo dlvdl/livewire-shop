@@ -3,7 +3,8 @@
 <?php $slot = ''?>
 
 @section('content')
-    <div>
+    <div class="h-full">
         @include('discovery-collection-section')
+        @include('products-section')
     </div>
 @endsection

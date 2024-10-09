@@ -19,7 +19,7 @@
             <livewire:header/>
         </div>
 
-        <main class="bg-primaryWhite h-full">
+        <main class="bg-primaryWhite">
             {{ $slot }}
 
             @yield('content')
