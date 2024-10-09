@@ -1,4 +1,4 @@
-<div class="w-full flex items-center justify-between font-Roboto font-medium text-black">
+<div class="w-full flex items-center justify-between font-Roboto font-medium text-black max-w-2xl px-6 lg:max-w-7xl mx-auto">
     <div>
         <svg class="w-[120px] h-[34px]">
             <use xlink:href="/icons.svg#logo-header"></use>
