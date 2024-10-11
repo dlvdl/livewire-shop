@@ -20,5 +20,9 @@
                 @include('testimonials-section')
             </div>
         </div>
+
+        <div class="max-w-2xl pt-[90px] lg:max-w-7xl mx-auto">
+            @include('popular-section')
+        </div>
     </div>
 @endsection
