@@ -14,5 +14,11 @@
                 @include('learn-more-section')
             </div>
         </div>
+
+        <div class="bg-primaryGreen bg-opacity-10 lg:pt-[90px] lg:pb-[60px]">
+            <div class="max-w-2xl mt-16 lg:max-w-7xl mx-auto">
+                @include('testimonials-section')
+            </div>
+        </div>
     </div>
 @endsection
