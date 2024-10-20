@@ -5,7 +5,7 @@
     }">
     <h1 class="font-Poppins text-2xl font-medium mb-4">Spiced Mint Candleaf®</h1>
 
-    <div class="w-full grid grid-cols-[35%,_65%]">
+    <div class="w-full grid grid-cols-[35%,_65%] font-Poppins">
         <div>
             <p class="text-2xl font-semibold text-primaryGreen my-4">$ 9.99</p>
             <label class="inline-block text-lg font-Roboto mb-2" for="quantity">Quantity</label>
@@ -23,7 +23,9 @@
                     x-model="subscriptionType"
                     defaultChecked="true"
                 >
-                    One time purchase
+                    <span class="font-Roboto">
+                        One time purchase
+                    </span>
                 </x-radio-input>
             </div>
             <div>
@@ -33,28 +35,60 @@
                     value="subscribe"
                     x-model="subscriptionType"
                 >
-                    <div class="flex items-center relative gap-2">
-                        <p>
-                            Subscribe and delivery every
-                        </p>
-                        <x-select
-                            :options="[
+                    <div class="">
+                        <div class="flex items-end relative gap-4 font-Roboto">
+                            <p>
+                                Subscribe and delivery every
+                            </p>
+                            <x-select
+                                :options="[
                                 '1_weeks' => '1 Week',
                                 '2_weeks' => '2 Weeks',
                                 '4_weeks' => '4 Weeks'
                                ]
                               "
-                            defaultSelected="1_weeks"
-                            id="subsription_duration_select"
-                            name="subscription_duration_select"
-                            x-model="subscriptionDuration"
-                        />
+                                defaultSelected="1_weeks"
+                                id="subsription_duration_select"
+                                name="subscription_duration_select"
+                                x-model="subscriptionDuration"
+                            >
+                                <x-slot:trigger>
+                                    <div
+                                        @click="toggle"
+                                        class="border border-[#DBDBDB] cursor-pointer flex justify-between items-center px-0.5"
+                                        :class="{ 'bg-gray-100': disabled }"
+                                        x-bind:disabled="disabled"
+                                    >
+                                        <div class="flex items-center flex-nowrap text-nowrap gap-2">
+                                            <span x-text="selected ? options[selected] : 'One week'" class="text-gray-700 text-sm"></span>
+                                            <svg x-show="!open" class="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                            <svg x-show="open" class="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 15l-7-7-7 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </x-slot:trigger>
+                            </x-select>
+                        </div>
+                        <p class="font-Poppins pt-2 text-[#656565] font-medium text-sm">
+                            Subscribe now and get the 10% of discount on every recurring order.  The discount will be applied at checkout.
+                            <a class="text-primaryGreen underline">See details.</a>
+                        </p>
                     </div>
-
                 </x-radio-input>
             </div>
-        </div>
 
-        <button @click.prevent="console.log(subscriptionDuration)">Test</button>
+            <div class="w-full">
+                <button class="bg-primaryGreen text-primaryWhite text-xl rounded px-[44px] py-4 w-full">
+                    <svg class="w-7 h-7 text-gray-100">
+                        <use xlink:href="/icons.svg#cart"></use>
+                    </svg>
+                    Add to cart
+                </button>
+            </div>
+
+        </div>
     </div>
 </form>

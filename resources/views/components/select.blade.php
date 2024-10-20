@@ -5,6 +5,7 @@
     'placeholder' => 'Select an option',
     'defaultSelected' => null,
     'disabled' => false,
+    'trigger'
 ])
 
 <div
@@ -28,22 +29,8 @@
 >
     <input type="hidden" name="{{ $name }}" :value="selected">
 
-    <div
-        @click="toggle"
-        class="border border-gray-300 cursor-pointer flex justify-between items-center px-0.5"
-        :class="{ 'bg-gray-100': disabled }"
-        x-bind:disabled="disabled"
-    >
-        <div class="flex items-center flex-nowrap text-nowrap">
-            <span x-text="selected ? options[selected] : '{{ $placeholder }}'" class="text-gray-700 text-sm"></span>
-            <svg x-show="!open" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-            <svg x-show="open" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 15l-7-7-7 7"></path>
-            </svg>
-        </div>
-    </div>
+    {{ $trigger }}
+
 
     <div
         x-show="open"
@@ -61,7 +48,7 @@
             <div
                 @click="selectOption(value)"
                 :class="{'bg-primaryGreen text-white': selected === value, 'hover:bg-gray-100': selected !== value}"
-                class="px-2 py-2 cursor-pointer"
+                class="px-2 py-2 cursor-pointer text-sm"
                 x-text="label"
             ></div>
         </template>
