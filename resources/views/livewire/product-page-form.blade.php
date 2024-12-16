@@ -80,13 +80,38 @@
                 </x-radio-input>
             </div>
 
-            <div class="w-full">
-                <button class="bg-primaryGreen text-primaryWhite text-xl rounded px-[44px] py-4 w-full">
+            <div class="w-full mt-[67px]">
+                <button class="flex justify-center gap-4 bg-primaryGreen text-primaryWhite text-xl rounded px-[44px] py-4 w-full">
                     <svg class="w-7 h-7 text-gray-100">
-                        <use xlink:href="/icons.svg#cart"></use>
+                        <use xlink:href="/icons.svg#cart-white"></use>
                     </svg>
                     Add to cart
                 </button>
+            </div>
+
+            <div class="w-full border rounded-lg border-[E6E6E6] mt-[40px] p-[22px] font-Poppins text-sm">
+                <ul class="space-y-2">
+                    <li>
+                        <span>Wax:</span>
+                        <span class="text-[#656565]">Top grade Soy wax that delivers a smoke less,  consistent burn.</span>
+                    </li>
+                    <li>
+                        <span>Fragrance:</span>
+                        <span class="text-[#656565]">Premium quality ingredients with natural essential oils.</span>
+                    </li>
+                    <li>
+                        <span>Burning Time:</span>
+                        <span class="text-[#656565]">70-75 hours.</span>
+                    </li>
+                    <li>
+                        <span>Dimension: </span>
+                        <span class="text-[#656565]">10cm x 5cm.</span>
+                    </li>
+                    <li>
+                        <span>Weight: </span>
+                        <span class="text-[#656565]">400g.</span>
+                    </li>
+                </ul>
             </div>
 
         </div>
