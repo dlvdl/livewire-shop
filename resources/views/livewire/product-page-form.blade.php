@@ -81,7 +81,7 @@
             </div>
 
             <div class="w-full mt-[67px]">
-                <button class="flex justify-center gap-4 bg-primaryGreen text-primaryWhite text-xl rounded px-[44px] py-4 w-full">
+                <button type="submit" class="flex justify-center gap-4 bg-primaryGreen text-primaryWhite text-xl rounded px-[44px] py-4 w-full">
                     <svg class="w-7 h-7 text-gray-100">
                         <use xlink:href="/icons.svg#cart-white"></use>
                     </svg>
