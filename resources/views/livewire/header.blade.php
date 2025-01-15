@@ -23,10 +23,10 @@
                 <use xlink:href="/icons.svg#profile"></use>
             </svg>
         </button>
-        <button>
+        <a href="{{ route('cart') }}">
             <svg class="w-7 h-7">
                 <use xlink:href="/icons.svg#cart"></use>
             </svg>
-        </button>
+        </a>
     </div>
 </div>

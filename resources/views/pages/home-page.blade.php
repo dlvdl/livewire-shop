@@ -6,7 +6,7 @@
     <div class="h-full">
         @include('discovery-collection-section')
         <div class="max-w-2xl mt-16 lg:max-w-7xl mx-auto">
-            @include('products-section')
+            @include('products-section', ['products' => $products])
         </div>
 
         <div class="bg-[#F7F8FA] lg:pt-[130px] lg:pb-[130px]">
@@ -22,7 +22,7 @@
         </div>
 
         <div class="max-w-2xl pt-[90px] lg:max-w-7xl mx-auto">
-            @include('popular-section')
+            @include('popular-section', ['products' => $popularProducts])
         </div>
     </div>
 @endsection
