@@ -2,11 +2,15 @@
 
 <?php $slot = ''?>
 
+@props([
+    'product'
+])
+
 @section('content')
     <div class="h-full text-primaryBlack max-w-2xl mt-16 lg:max-w-7xl mx-auto py-10">
         <div class="grid grid-cols-2 gap-10">
             <div class="h-full flex flex-col">
-                <img src="/assets/product-mint-big.png"/>
+                <img class="min-h-[430px] w-full" src="{{ asset($product->galleryImage->path) }}"/>
 
                 <p class="font-medium font-Poppins text-2xl text-center mb-4 leading-6 tracking-tight">
                     All hand-made with natural soy wax,
@@ -18,7 +22,7 @@
                 </p>
             </div>
             <div class="h-full">
-                <livewire:product-page-form/>
+                <livewire:product-page-form :product="$product"/>
             </div>
         </div>
     </div>

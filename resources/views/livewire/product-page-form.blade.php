@@ -3,11 +3,11 @@
         subscriptionType: 'subscribe',
         subscriptionDuration: '1_weeks',
     }">
-    <h1 class="font-Poppins text-2xl font-medium mb-4">Spiced Mint Candleaf®</h1>
+    <h1 class="font-Poppins text-2xl font-medium mb-4">{{ $product->name }}®</h1>
 
     <div class="w-full grid grid-cols-[35%,_65%] font-Poppins">
         <div>
-            <p class="text-2xl font-semibold text-primaryGreen my-4">$ 9.99</p>
+            <p class="text-2xl font-semibold text-primaryGreen my-4">{{ $product->price }}</p>
             <label class="inline-block text-lg font-Roboto mb-2" for="quantity">Quantity</label>
             <div class="w-[85px]">
                 <x-input x-model="productQuantity"/>
