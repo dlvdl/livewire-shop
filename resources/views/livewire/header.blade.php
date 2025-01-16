@@ -1,9 +1,9 @@
 <div class="w-full flex items-center justify-between font-Roboto font-medium text-black max-w-2xl p-6 lg:max-w-7xl mx-auto">
-    <div>
+    <a href="{{ route('home') }}">
         <svg class="w-[120px] h-[34px]">
             <use xlink:href="/icons.svg#logo-header"></use>
         </svg>
-    </div>
+    </a>
     <nav>
         <ul class="flex gap-x-20">
             <li>

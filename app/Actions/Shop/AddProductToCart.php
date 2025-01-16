@@ -7,12 +7,14 @@ use App\Models\Cart;
 
 class AddProductToCart
 {
-    public function add($productId)
+    public function add($productId, $quantity=1)
     {
-        CartFactory::make()->items()->firstOrCreate(
+        $cartItem = CartFactory::make()->items()->firstOrCreate(
             ['product_id' => $productId],
             ['quantity' => 0]
-        )
-        ->increment('quantity');
+        );
+
+        $cartItem->quantity = $cartItem->quantity + $quantity;
+        $cartItem->save();
     }
 }
