@@ -24,5 +24,7 @@ class ProductPageForm extends Component
     public function addProductToCart(AddProductToCart $cart, $product): void
     {
         $cart->add($product['id'], $product['quantity']);
+
+        $this->dispatch('productAddedToCart');
     }
 }
