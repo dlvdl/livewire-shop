@@ -15,8 +15,12 @@
 <body class="font-sans antialiased h-screen w-full">
     <object type="image/svg+xml" data="/icons.svg" class="hidden"></object>
     <div class="mx-auto relative w-full h-full flex flex-col justify-between">
-        <div class="bg-primaryWhite">
+        <div class="bg-primaryWhite relative z-0">
             <livewire:header/>
+        </div>
+
+        <div class="fixed left-1/2 -translate-x-1/2 z-50">
+            <livewire:notification/>
         </div>
 
         <main class="bg-primaryWhite">
@@ -25,7 +29,7 @@
             @yield('content')
         </main>
 
-        <div class="bg-primaryBlack">
+        <div class="bg-primaryBlack relative z-0">
             <livewire:footer/>
         </div>
     </div>

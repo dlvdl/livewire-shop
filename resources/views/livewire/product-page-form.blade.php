@@ -3,10 +3,17 @@
         productQuantity: 1,
         subscriptionType: 'subscribe',
         subscriptionDuration: '1_weeks',
-        onAddToCartClick() {
-            this.$wire.addProductToCart({...this.product, quantity: this.productQuantity})
+        async onAddToCartClick() {
+            await this.$wire.addProductToCart({...this.product, quantity: this.productQuantity});
+
+            this.$dispatch('show-notification', {
+                message: 'Product added to cart successfully'
+            });
         }
-    }">
+    }"
+    class="relative"
+>
+
     <form>
         <h1 class="font-Poppins text-2xl font-medium mb-4">{{ $product->name }}®</h1>
 
@@ -94,7 +101,7 @@
                 <div class="w-full mt-[67px]">
                     <button type="button"
                             @click="onAddToCartClick"
-                            class="flex justify-center gap-4 bg-primaryGreen text-primaryWhite text-xl rounded px-[44px] py-4 w-full"
+                            class="flex justify-center gap-4 bg-primaryGreen text-primaryWhite text-xl rounded px-[44px] py-4 w-full hover:opacity-80"
                     >
                         <svg class="w-7 h-7 text-gray-100">
                             <use xlink:href="/icons.svg#cart-white"></use>

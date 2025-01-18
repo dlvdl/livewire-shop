@@ -2,7 +2,7 @@
     'product'
 ])
 
-<a href="{{ route('product', $product->id) }}" class="w-full bg-primaryWhite drop-shadow cursor-pointer">
+<a href="{{ route('product', $product->id) }}" class="w-full bg-primaryWhite drop-shadow cursor-pointer relative z-0">
     <div>
         <div class="w-full bg-[#F7F8FA] flex justify-center">
             <img class="h-[210px] w-[280px]" src="{{ asset($product->galleryImage->path) }}">
