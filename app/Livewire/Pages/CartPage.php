@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages;
 
 use App\Factories\CartFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class CartProductTable extends Component
+class CartPage extends Component
 {
     public Collection $cartItems;
 
@@ -18,8 +18,7 @@ class CartProductTable extends Component
 
     public function render(): View
     {
-        return view('livewire.cart-product-table')
-            ->layout('components.layouts.app');
+        return view('livewire.pages.cart-page');
     }
 
     public function mount(): void
