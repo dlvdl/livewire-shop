@@ -10,6 +10,6 @@
         </p>
     </div>
     <div>
-        <x-button text="Checkout" link=""></x-button>
+        <x-button text="Checkout" link="{{ route('checkout') }}"></x-button>
     </div>
 </div>
