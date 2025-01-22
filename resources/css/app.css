@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.error-msg[hidden] {
+    opacity: 0;
+    height: 0px;
+    transform: scale(0);
+}
+.error-msg {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: darkred;
+    transform-origin: left;
+    transition: all 200ms;
+    display: block;
+}
