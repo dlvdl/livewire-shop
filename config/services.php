@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'nova_post_api' => [
+        'api_key' => env('NOVA_POST_API_KEY'),
+        'url' => env('NOVA_POST_API_URL'),
+    ],
 ];
