@@ -35,7 +35,7 @@
     <div
         x-show="open"
         @click.away="open = false"
-        class="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-10 w-[300px]"
+        class="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-10 w-full"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="transform opacity-0 scale-95"
         x-transition:enter-end="transform opacity-100 scale-100"

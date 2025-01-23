@@ -32,7 +32,42 @@ class NovaPostService
 
         if ($data['success'] && $data['data'][0]['Addresses']) {
             $result = array_reduce($data['data'][0]['Addresses'], function ($carry, $item) {
-                $carry[] = $item['Present'];
+                $result = [];
+                $result['name'] = $item['Present'];
+                $result['ref'] = $item['DeliveryCity'];
+                $result['mainDescription'] = $item['MainDescription'];
+                $carry[] = $result;
+
+                return $carry;
+            }, []);
+        }
+
+        return $result;
+    }
+
+    public function getDepartments(string $query, string $ref)
+    {
+        $response = Http::post($this->novaPostApiUrl, [
+            'apiKey' => $this->novaPostApiKey,
+            'modelName' => 'AddressGeneral',
+            'calledMethod' => 'getWarehouses',
+            'methodProperties' => [
+
+                "CityRef" => $ref,
+                "Language" => "UA",
+            ]
+        ]);
+
+        $data = $response->json();
+        $result = [];
+
+        if ($data['success'] && $data['data']) {
+            $result = array_reduce($data['data'], function ($carry, $item) {
+                $result = [];
+                $result['description'] = $item['Description'];
+                $result['number'] = $item['Number'];
+                $result['ref'] = $item['Ref'];
+                $carry[] = $result;
 
                 return $carry;
             }, []);
