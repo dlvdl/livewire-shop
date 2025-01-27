@@ -13,8 +13,12 @@ use Money\Money;
 class CheckoutPage extends Component
 {
     public Collection $cartItems;
+
     public array $cities;
+
     public string $query = '';
+
+    public array $departments = [];
 
     protected $listeners = [
         'searchCities' => 'searchCities',
@@ -27,11 +31,20 @@ class CheckoutPage extends Component
 
     public function mount(NovaPostService $novaPostService): void
     {
-        $this->cartItems = CartFactory::make()->items()
+        $cart = CartFactory::make();
+
+        $this->cartId = $cart->id;
+
+        $this->cartItems = $cart->items()
             ->with('product', 'product.galleryImage')
             ->get();
 
         $this->cities = $novaPostService->getCities('A');
+    }
+
+    public function submit($data): void
+    {
+        var_dump($data);
     }
 
     #[Computed]
@@ -48,15 +61,20 @@ class CheckoutPage extends Component
 
     public function searchCities(string $query): array
     {
-        $novaPostService = new NovaPostService();
+        $novaPostService = new NovaPostService;
 
         return $novaPostService->getCities($query);
     }
 
-    public function searchDepartments(string $query, string $ref): array
+    public function searchDepartments(string $query, string $cityName): void
     {
-        $novaPostService = new NovaPostService();
+        if (! $query) {
+            return;
+        }
 
-        return $novaPostService->getDepartments($query, $ref);
+        $novaPostService = new NovaPostService;
+        $searchString = "Відділення №$query";
+
+        $this->departments = $novaPostService->getDepartmentsByString($searchString, $cityName);
     }
 }

@@ -2,28 +2,43 @@
     wire:ignore
     x-data="{
         cities: [],
-        departments: [],
+        departments: @entangle('departments'),
         loading: false,
         selectedCity: null,
+        selectedDepartment: null,
         init() {
-            this.$watch('selectedCity', async (value) => {
-                if (value) {
-                    this.departments = await this.$wire.searchDepartments(value.mainDescription, value.ref);
-                }
-            });
+            this.$watch('selectedCity', () => {
+                this.departments = [];
+                this.selectedDepartment = null;
+            })
         },
         handleSubmit(e) {
             e.preventDefault();
-            console.log($validate.isComplete('form'));
-            console.log($validate.data(e.target));
-            console.log(this.selectedCity);
+
+            const isValid = $validate.isComplete('form');
+
+            if (isValid) {
+                const validatedData = $validate.data(e.target);
+                const formData = {};
+
+                validatedData.forEach((item) => {
+                    const { name, value } = item;
+
+                    formData[name] = value;
+                });
+
+                this.$wire.submit(formData);
+            }
         },
         async handleCityInput(query) {
-          this.cities = await this.$wire.searchCities(query);
+            this.cities = await this.$wire.searchCities(query);
+        },
+        async handleDepartmentInput(query) {
+            await this.$wire.searchDepartments(query, this.selectedCity.mainDescription);
         }
     }"
-    class="max-w-2xl lg:max-w-7xl mx-auto text-primaryBlack font-Roboto">
-    <div class="grid grid-cols-2">
+    class="max-w-2xl lg:max-w-7xl mx-auto text-primaryBlack font-Roboto h-full">
+    <div class="grid grid-cols-2 h-full">
         <div class="bg-primaryWhite pt-4 px-4">
             <a href="{{ route('home') }}">
                 <svg class="w-[120px] h-[34px]">
@@ -109,7 +124,7 @@
                                 @change="show=true"
                                 @click="show=true"
                                 type="text" placeholder="City"
-                                class="input input-bordered w-full bg-primaryWhite focus:border-primaryGreen"
+                                class="input input-bordered w-full bg-primaryWhite focus:border-primaryGreen relative z-0"
                                 data-error-msg='Select city from the list'
                                 name="city"
                                 x-validate.required
@@ -117,7 +132,7 @@
                         </div>
 
                         <template x-if="cities.length > 0 && show">
-                            <div class="absolute top-14 left-0 bg-primaryWhite w-full border border-primaryBlack max-h-[200px] overflow-y-scroll">
+                            <div class="absolute z-50 top-14 left-0 bg-primaryWhite w-full border border-primaryBlack max-h-[200px] overflow-y-scroll">
                                 <template x-for="city in cities">
                                     <div @click="handleOptionClick(city)" class="w-full hover:bg-primaryGreen px-4 py-1 cursor-pointer">
                                         <span x-text="city.name"></span>
@@ -128,13 +143,64 @@
                     </div>
 
                     <template x-if="selectedCity">
-                        <select name="novaPostDepartment" x-model="form.novaPostDepartment"
-                               class="select select-bordered w-full bg-primaryWhite focus:border-primaryGreen">
-                            <option disabled selected>Nova Post Department</option>
-                            <template x-for="department in departments">
-                                <option x-text="department.description"></option>
+                        <div
+                            @click.outside="handleClickOutside"
+                            x-data="{
+                            query: '',
+                            show: false,
+                            handleClickOutside() {
+                                this.show = false;
+
+                                if (!this.isValidDepartment) {
+                                    this.query = '';
+                                    selectedDepartment = null;
+                                }
+
+                                $validate.updateData('department');
+                                $validate.toggleError('department', true);
+                            },
+                            handleOptionClick(value) {
+                                this.query = value.description;
+                                this.show = false;
+
+                                selectedDepartment = { ...value };
+                                $validate.updateData('department');
+                                $validate.toggleError('department', true);
+                            },
+                            get isValidDepartment() {
+                                return departments.find((value) => {
+                                    return value.description === this.query;
+                                });
+                            }
+                        }"
+                            class="relative">
+                            <div>
+                                <input
+                                    :class="isValidDepartment ? '' : 'border-red-500'"
+                                    @input.debounce.250ms="handleDepartmentInput(query)"
+                                    x-model="query"
+                                    @change="show=true"
+                                    @click="show=true"
+                                    type="text" placeholder="Department"
+                                    class="input input-bordered w-full bg-primaryWhite focus:border-primaryGreen relative z-0"
+                                    data-error-msg='Select department from the list'
+                                    name="department"
+                                    x-validate.required
+                                />
+                            </div>
+
+                            <template x-if="departments.length > 0 && show">
+                                <div
+                                    class="absolute z-50 top-14 left-0 bg-primaryWhite w-full border border-primaryBlack max-h-[200px] overflow-y-scroll">
+                                    <template x-for="department in departments">
+                                        <div @click="handleOptionClick(department)"
+                                             class="w-full hover:bg-primaryGreen px-4 py-1 cursor-pointer">
+                                            <span x-text="department.description"></span>
+                                        </div>
+                                    </template>
+                                </div>
                             </template>
-                        </select>
+                        </div>
                     </template>
 
                     <div>

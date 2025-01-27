@@ -14,13 +14,13 @@
 </head>
 <body class="font-sans antialiased w-full bg-primaryWhite h-screen">
     <object type="image/svg+xml" data="/icons.svg" class="hidden"></object>
-    <div class="mx-auto relative w-full h-full">
+    <div class="mx-auto relative w-full h-[100%]">
         <main class="bg-primaryWhite h-full">
             {{ $slot }}
 
             @yield('content')
         </main>
-        <div class="bg-primaryBlack relative z-0">
+        <div class="bg-primaryBlack relative z-0 h">
             <livewire:footer/>
         </div>
     </div>
