@@ -79,6 +79,7 @@ class CheckoutPage extends Component
 
     public function submit($formData): void
     {
+        $this->dispatch('open-modal');
         $parsedData = $formData;
     }
 }

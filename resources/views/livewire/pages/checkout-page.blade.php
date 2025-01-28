@@ -156,4 +156,6 @@
             </div>
         </div>
     </div>
+
+    <livewire:modal/>
 </div>

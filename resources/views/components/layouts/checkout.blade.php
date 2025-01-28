@@ -20,9 +20,6 @@
 
             @yield('content')
         </main>
-        <div class="bg-primaryBlack relative z-0 h">
-            <livewire:footer/>
-        </div>
     </div>
     <script defer src="https://unpkg.com/@colinaut/alpinejs-plugin-simple-validate@1/dist/alpine.validate.min.js"></script>
 </body>
