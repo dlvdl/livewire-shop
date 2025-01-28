@@ -14,7 +14,7 @@ class CheckoutPage extends Component
 {
     public Collection $cartItems;
 
-    public array $cities;
+    public array $cities = [];
 
     public string $query = '';
 
@@ -42,11 +42,6 @@ class CheckoutPage extends Component
         $this->cities = $novaPostService->getCities('A');
     }
 
-    public function submit($data): void
-    {
-        var_dump($data);
-    }
-
     #[Computed]
     public function total(): Money
     {
@@ -59,11 +54,15 @@ class CheckoutPage extends Component
         return $total;
     }
 
-    public function searchCities(string $query): array
+    public function searchCities(string $query): void
     {
+        if (! $query) {
+            return;
+        }
+
         $novaPostService = new NovaPostService;
 
-        return $novaPostService->getCities($query);
+        $this->cities = $novaPostService->getCities($query);
     }
 
     public function searchDepartments(string $query, string $cityName): void
@@ -76,5 +75,10 @@ class CheckoutPage extends Component
         $searchString = "Відділення №$query";
 
         $this->departments = $novaPostService->getDepartmentsByString($searchString, $cityName);
+    }
+
+    public function submit($formData): void
+    {
+        $parsedData = $formData;
     }
 }

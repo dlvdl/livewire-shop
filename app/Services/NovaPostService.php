@@ -65,7 +65,7 @@ class NovaPostService
         if ($data['success'] && $data['data']) {
             $result = array_reduce($data['data'], function ($carry, $item) {
                 $result = [];
-                $result['description'] = $item['Description'];
+                $result['name'] = $item['Description'];
                 $result['number'] = $item['Number'];
                 $result['ref'] = $item['Ref'];
                 $carry[] = $result;
@@ -96,7 +96,7 @@ class NovaPostService
         if ($data['success'] && $data['data']) {
             $result = array_reduce($data['data'], function ($carry, $item) {
                 $result = [];
-                $result['description'] = $item['Description'];
+                $result['name'] = $item['Description'];
                 $result['number'] = $item['Number'];
                 $result['ref'] = $item['Ref'];
                 $carry[] = $result;

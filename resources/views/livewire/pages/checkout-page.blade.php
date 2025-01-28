@@ -1,7 +1,7 @@
 <div
     wire:ignore
     x-data="{
-        cities: [],
+        cities: @entangle('cities'),
         departments: @entangle('departments'),
         loading: false,
         selectedCity: null,
@@ -11,6 +11,15 @@
                 this.departments = [];
                 this.selectedDepartment = null;
             })
+
+           document.addEventListener('city-select-updated', async (e) => {
+                console.log(e.detail)
+                await this.handleCityInput(e.detail);
+           })
+
+           document.addEventListener('department-select-updated', async (e) => {
+                await this.handleDepartmentInput(e.detail);
+           })
         },
         handleSubmit(e) {
             e.preventDefault();
@@ -27,11 +36,13 @@
                     formData[name] = value;
                 });
 
+                console.log(formData)
+
                 this.$wire.submit(formData);
             }
         },
         async handleCityInput(query) {
-            this.cities = await this.$wire.searchCities(query);
+            await this.$wire.searchCities(query);
         },
         async handleDepartmentInput(query) {
             await this.$wire.searchDepartments(query, this.selectedCity.mainDescription);
@@ -85,122 +96,27 @@
                         <option value="not_selected" disabled selected>Delivery method</option>
                         <option value="nova_post">Nova Post</option>
                     </select>
-                    <div
-                        @click.outside="handleClickOutside"
-                        x-data="{
-                            query: '',
-                            show: false,
-                            handleClickOutside() {
-                                this.show = false;
 
-                                if (!this.isValidCity) {
-                                    this.query = '';
-                                    selectedCity = null;
-                                }
-
-                                $validate.updateData('city');
-                                $validate.toggleError('city', true);
-                            },
-                            handleOptionClick(value) {
-                                this.query = value.name;
-                                this.show = false;
-
-                                selectedCity = { ...value };
-                                $validate.updateData('city');
-                                $validate.toggleError('city', true);
-                            },
-                            get isValidCity() {
-                                return cities.find((value) => {
-                                    return value.name === this.query
-                                });
-                            }
+                    <x-searchable-select
+                        validationRequired="true"
+                        name="city"
+                        :placeholder="'City'"
+                        x-model="{
+                            options: cities,
+                            selectedOption: selectedCity
                         }"
-                        class="relative">
-                        <div>
-                            <input
-                                :class="isValidCity ? '' : 'border-red-500'"
-                                @input.debounce.250ms="handleCityInput(query)"
-                                x-model="query"
-                                @change="show=true"
-                                @click="show=true"
-                                type="text" placeholder="City"
-                                class="input input-bordered w-full bg-primaryWhite focus:border-primaryGreen relative z-0"
-                                data-error-msg='Select city from the list'
-                                name="city"
-                                x-validate.required
-                            />
-                        </div>
-
-                        <template x-if="cities.length > 0 && show">
-                            <div class="absolute z-50 top-14 left-0 bg-primaryWhite w-full border border-primaryBlack max-h-[200px] overflow-y-scroll">
-                                <template x-for="city in cities">
-                                    <div @click="handleOptionClick(city)" class="w-full hover:bg-primaryGreen px-4 py-1 cursor-pointer">
-                                        <span x-text="city.name"></span>
-                                    </div>
-                                </template>
-                            </div>
-                        </template>
-                    </div>
+                    />
 
                     <template x-if="selectedCity">
-                        <div
-                            @click.outside="handleClickOutside"
-                            x-data="{
-                            query: '',
-                            show: false,
-                            handleClickOutside() {
-                                this.show = false;
-
-                                if (!this.isValidDepartment) {
-                                    this.query = '';
-                                    selectedDepartment = null;
-                                }
-
-                                $validate.updateData('department');
-                                $validate.toggleError('department', true);
-                            },
-                            handleOptionClick(value) {
-                                this.query = value.description;
-                                this.show = false;
-
-                                selectedDepartment = { ...value };
-                                $validate.updateData('department');
-                                $validate.toggleError('department', true);
-                            },
-                            get isValidDepartment() {
-                                return departments.find((value) => {
-                                    return value.description === this.query;
-                                });
-                            }
-                        }"
-                            class="relative">
-                            <div>
-                                <input
-                                    :class="isValidDepartment ? '' : 'border-red-500'"
-                                    @input.debounce.250ms="handleDepartmentInput(query)"
-                                    x-model="query"
-                                    @change="show=true"
-                                    @click="show=true"
-                                    type="text" placeholder="Department"
-                                    class="input input-bordered w-full bg-primaryWhite focus:border-primaryGreen relative z-0"
-                                    data-error-msg='Select department from the list'
-                                    name="department"
-                                    x-validate.required
-                                />
-                            </div>
-
-                            <template x-if="departments.length > 0 && show">
-                                <div
-                                    class="absolute z-50 top-14 left-0 bg-primaryWhite w-full border border-primaryBlack max-h-[200px] overflow-y-scroll">
-                                    <template x-for="department in departments">
-                                        <div @click="handleOptionClick(department)"
-                                             class="w-full hover:bg-primaryGreen px-4 py-1 cursor-pointer">
-                                            <span x-text="department.description"></span>
-                                        </div>
-                                    </template>
-                                </div>
-                            </template>
-                        </div>
+                        <x-searchable-select
+                            validationRequired="true"
+                            name="department"
+                            :placeholder="'Department'"
+                            x-model="{
+                                options: departments,
+                                selectedOption: selectedDepartment
+                            }"
+                        />
                     </template>
 
                     <div>
