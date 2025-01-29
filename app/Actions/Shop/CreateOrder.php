@@ -2,6 +2,7 @@
 
 namespace App\Actions\Shop;
 
+use App\Enums\ShippingStatusType;
 use App\Factories\CartFactory;
 use App\Models\Order;
 
@@ -9,10 +10,17 @@ class CreateOrder
 {
     public function create(array $formData)
     {
+        $removeAction = new RemoveProductFromCart();
         $cart = CartFactory::make();
         $cartItems = $cart->items;
+
+        $formData = [
+            ...$formData,
+            'status' => ShippingStatusType::PENDING,
+            'name' => $formData['firstName'] . ' ' . $formData['lastName'],
+        ];
+
         $order = Order::create($formData);
-        $removeAction = new RemoveProductFromCart();
 
         foreach ($cartItems as $cartItem) {
             $order->items()->create([

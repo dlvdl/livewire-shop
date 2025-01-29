@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Actions\Shop\CreateOrder;
 use App\Factories\CartFactory;
 use App\Services\NovaPostService;
 use Illuminate\Database\Eloquent\Collection;
@@ -18,6 +19,8 @@ class CheckoutPage extends Component
 
     public string $query = '';
 
+    public string $cartId;
+
     public array $departments = [];
 
     protected $listeners = [
@@ -32,7 +35,6 @@ class CheckoutPage extends Component
     public function mount(NovaPostService $novaPostService): void
     {
         $cart = CartFactory::make();
-
         $this->cartId = $cart->id;
 
         $this->cartItems = $cart->items()
@@ -77,9 +79,10 @@ class CheckoutPage extends Component
         $this->departments = $novaPostService->getDepartmentsByString($searchString, $cityName);
     }
 
-    public function submit($formData): void
+    public function submit(array $formData, CreateOrder $order): void
     {
+        $order->create($formData);
+
         $this->dispatch('open-modal');
-        $parsedData = $formData;
     }
 }

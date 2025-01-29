@@ -14,6 +14,7 @@ class Order extends Model
         'status',
         'shipping_method',
         'shipping_address',
+        'nova_post_department'
     ];
 
     public function items(): HasMany

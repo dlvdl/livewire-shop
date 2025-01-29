@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('status')->nullable();
             $table->string('shipping_method')->nullable();
+            $table->string('nova_post_department')->nullable();
             $table->string('shipping_address')->nullable();
             $table->timestamps();
         });

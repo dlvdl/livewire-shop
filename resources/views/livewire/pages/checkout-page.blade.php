@@ -12,12 +12,12 @@
                 this.selectedDepartment = null;
             })
 
-           document.addEventListener('city-select-updated', async (e) => {
+           document.addEventListener('shipping_address-select-updated', async (e) => {
                 console.log(e.detail)
                 await this.handleCityInput(e.detail);
            })
 
-           document.addEventListener('department-select-updated', async (e) => {
+           document.addEventListener('nova_post_department-select-updated', async (e) => {
                 await this.handleDepartmentInput(e.detail);
            })
         },
@@ -92,14 +92,14 @@
                     <div>
                         <h3 class="font-Roboto text-xl font-medium mt-8">Delivery Method</h3>
                     </div>
-                    <select x-validate="$el.value !== 'not_selected'" name="deliveryMethod" x-model="form.deliveryMethod" class="select select-bordered w-full bg-primaryWhite focus:border-primaryGreen">
+                    <select x-validate="$el.value !== 'not_selected'" name="shipping_method" x-model="form.deliveryMethod" class="select select-bordered w-full bg-primaryWhite focus:border-primaryGreen">
                         <option value="not_selected" disabled selected>Delivery method</option>
                         <option value="nova_post">Nova Post</option>
                     </select>
 
                     <x-searchable-select
                         validationRequired="true"
-                        name="city"
+                        name="shipping_address"
                         :placeholder="'City'"
                         x-model="{
                             options: cities,
@@ -110,7 +110,7 @@
                     <template x-if="selectedCity">
                         <x-searchable-select
                             validationRequired="true"
-                            name="department"
+                            name="nova_post_department"
                             :placeholder="'Department'"
                             x-model="{
                                 options: departments,

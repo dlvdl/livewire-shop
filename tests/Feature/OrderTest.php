@@ -50,7 +50,8 @@ class OrderTest extends TestCase
             'phone' => $phone,
             'shippingAddress' => $shippingAddress,
             'status' => $status,
-            'name' => $name,
+            'firstName' => $name,
+            'lastName' => $name,
             'shippingMethod' => $shippingMethod,
         ]);
 
