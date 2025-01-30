@@ -27,7 +27,7 @@
     <td class="text-center">
         <div class="flex justify-center">
             <div class="w-[75px]">
-                <x-input x-model="quantity"/>
+                <x-quantity-selector x-model="quantity"/>
             </div>
         </div>
     </td>

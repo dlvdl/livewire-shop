@@ -22,7 +22,7 @@
                 <p class="text-2xl font-semibold text-primaryGreen my-4">{{ $product->price }}</p>
                 <label class="inline-block text-lg font-Roboto mb-2" for="quantity">Quantity</label>
                 <div class="w-[85px]">
-                    <x-input x-model="productQuantity"/>
+                    <x-quantity-selector x-model="productQuantity"/>
                 </div>
             </div>
 
