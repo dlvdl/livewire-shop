@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Livewire\Pages\Dashboard;
-use App\Livewire\Pages\LoginPage;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProductPageController;
 use App\Livewire\Pages\CartPage;
 use App\Livewire\Pages\CheckoutPage;
+use App\Livewire\Pages\Dashboard\Home as DashboardHomePage;
+use App\Livewire\Pages\Dashboard\Products as DashboardProductsPage;
+use App\Livewire\Pages\Dashboard\Orders as DashboardOrdersPage;
+use Illuminate\Support\Facades\Route;
 
 
 Route::view('/login', 'pages.Auth.login-page')->name('login-page');
@@ -19,6 +20,12 @@ Route::get('/products/{product}', [ProductPageController::class, 'show'])->name(
 Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/checkout', CheckoutPage::class)->name('checkout');
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-});
+//Route::middleware(['auth:sanctum'])->group(function () {
+//
+//});
+
+
+
+Route::get('/dashboard', DashboardHomePage::class)->name('dashboard.home');
+Route::get('/dashboard/products', DashboardProductsPage::class)->name('dashboard.products');
+Route::get('/dashboard/orders', DashboardOrdersPage::class)->name('dashboard.orders');
