@@ -19,7 +19,3 @@ Route::get('/', [HomePageController::class, 'index'])->name('home');
 Route::get('/products/{product}', [ProductPageController::class, 'show'])->name('product');
 Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/checkout', CheckoutPage::class)->name('checkout');
-
-//Route::middleware(['auth:sanctum'])->group(function () {
-//
-//});
