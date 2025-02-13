@@ -23,9 +23,3 @@ Route::get('/checkout', CheckoutPage::class)->name('checkout');
 //Route::middleware(['auth:sanctum'])->group(function () {
 //
 //});
-
-
-
-Route::get('/dashboard', DashboardHomePage::class)->name('dashboard.home');
-Route::get('/dashboard/products', DashboardProductsPage::class)->name('dashboard.products');
-Route::get('/dashboard/orders', DashboardOrdersPage::class)->name('dashboard.orders');

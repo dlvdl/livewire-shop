@@ -138,7 +138,7 @@
                 @foreach($cartItems as $cartItem)
                     <div class="flex gap-4">
                         <div class="relative bg-primaryWhite">
-                            <img class="w-[160px] h-[120px]" src="{{ asset($cartItem->product->galleryImage->path) }}">
+                            <img class="w-[160px] h-[120px]" src="{{ asset($cartItem->product->galleryImage->url) }}">
                             <div class="absolute -top-1 -right-1 bg-primaryGreen w-6 h-6 aspect-square rounded-full flex justify-center items-center">
                                 <span class="text-white">{{ $cartItem->quantity }}</span>
                             </div>

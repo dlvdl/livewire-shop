@@ -11,7 +11,7 @@
     <td class="text-start py-6">
         <div class="flex">
             <div>
-                <img class="w-[160px] h-[130px]" src="{{ asset($item->product->galleryImage->path) }}">
+                <img class="w-[160px] h-[130px]" src="{{ asset($item->product->galleryImage->url) }}">
             </div>
             <div>
                 <h3 class="font-medium font-Poppins text-2xl mb-4">{{ $item->product->name }}</h3>

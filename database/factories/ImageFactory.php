@@ -21,14 +21,14 @@ class ImageFactory extends Factory
             'path' => $this
                 ->faker
                 ->randomElement([
-                    'assets/product-blueberries.png',
-                    'assets/product-cherries.png',
-                    'assets/product-cinnamon.png',
-                    'assets/product-lavander.png',
-                    'assets/product-lemon.png',
-                    'assets/product-mint.png',
-                    'assets/product-orange.png',
-                    'assets/product-straweberry.png',
+                    'products/product-blueberries.png',
+                    'products/product-cherries.png',
+                    'products/product-cinnamon.png',
+                    'products/product-lavander.png',
+                    'products/product-lemon.png',
+                    'products/product-mint.png',
+                    'products/product-orange.png',
+                    'products/product-straweberry.png',
                 ]),
             'type' => ImageType::GALLERY
         ];

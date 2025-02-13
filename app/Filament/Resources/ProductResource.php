@@ -2,11 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ImageType;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +20,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductResource extends Resource
 {
@@ -29,7 +35,17 @@ class ProductResource extends Resource
             ->schema([
                 TextInput::make('name')->autofocus()->required(),
                 TextInput::make('price')->required(),
-                FileUpload::make('image.galleryImage.path')->required(),
+                TextInput::make('description')->required(),
+                Repeater::make('galleryImage')
+                ->relationship('galleryImage')
+                ->schema([
+                    FileUpload::make('path')
+                    ->disk('public')
+                        ->directory('products')
+                        ->required(),
+                    Hidden::make('type')
+                    ->default(ImageType::GALLERY)
+                ]),
             ]);
     }
 
@@ -39,10 +55,11 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 ImageColumn::make('image')
-                    ->getStateUsing(fn ($record) => $record->galleryImage ? asset($record->galleryImage->path) : null)
-                    ->width(100)
-                    ->height(100)
-                    ->alignCenter(),
+                    ->getStateUsing(fn ($record) =>
+                    $record->galleryImage
+                        ? $record->galleryImage->path
+                        : null
+                    ),
                 TextColumn::make('price'),
                 TextColumn::make('created_at'),
                 TextColumn::make('updated_at')

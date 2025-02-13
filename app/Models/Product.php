@@ -18,6 +18,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'price',
+        'description',
     ];
 
     protected function price(): Attribute
@@ -44,7 +45,7 @@ class Product extends Model
         return $this->hasMany(Image::class)->where('type', ImageType::GALLERY);
     }
 
-    public function galleryImage()
+    public function galleryImage(): HasOne
     {
         return $this->hasOne(Image::class)->where('type', ImageType::GALLERY);
     }
