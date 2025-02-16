@@ -2,18 +2,25 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ShippingStatusType;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Money\Money;
 
 class OrderResource extends Resource
 {
@@ -26,11 +33,14 @@ class OrderResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')->autofocus()->required()->disabled(),
-                TextInput::make('email')->autofocus()->required()->disabled(),
-                TextInput::make('phone')->autofocus()->required()->disabled(),
-                TextInput::make('status')->autofocus()->required()->disabled(),
-                TextInput::make('shipping_method')->autofocus()->required()->disabled(),
-                TextInput::make('nova_post_department')->autofocus()->required()->disabled(),
+                TextInput::make('email')->required()->disabled(),
+                TextInput::make('phone')->required()->disabled(),
+                Select::make('status')->required()
+                    ->options(collect(ShippingStatusType::cases())->mapWithKeys(function ($item) {
+                        return [$item->value => ucfirst($item->value)];
+                    })->toArray()),
+                TextInput::make('shipping_method')->required()->disabled(),
+                TextInput::make('nova_post_department')->required()->disabled(),
             ]);
     }
 
@@ -40,18 +50,33 @@ class OrderResource extends Resource
             ->columns([
                 TextColumn::make('id')->label('ID'),
                 TextColumn::make('email'),
-                TextColumn::make('email'),
+                TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state) => match ($state) {
+                        'pending' => 'warning',
+                        'completed' => 'success',
+                    }),
                 TextColumn::make('phone'),
+                TextColumn::make('Products count')
+                    ->getStateUsing(fn ($record) => $record->items()->count()),
+                TextColumn::make('total_price')
+                    ->label('Total Price')
+                    ->getStateUsing(fn ($record) => Money::UAH($record->items()->sum('subtotal'))),
+                TextColumn::make('created_at')
+                    ->sortable()
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options(collect(ShippingStatusType::cases())->mapWithKeys(function ($item) {
+                        return [$item->value => ucfirst($item->value)];
+                    })->toArray())
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

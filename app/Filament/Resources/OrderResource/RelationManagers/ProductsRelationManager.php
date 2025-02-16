@@ -44,8 +44,8 @@ class ProductsRelationManager extends RelationManager
                     ->label('Price'),
                 TextColumn::make('subtotal')
                     ->label('Subtotal')
-                    ->getStateUsing(fn ($record) => Money::UAH($record->price)->multiply($record->quantity))
-
+                    ->summarize(Sum::make()->formatStateUsing(fn ($state) => Money::UAH($state))
+                    ->label('Total Order Price'))
             ])
             ->headerActions([
                 CreateAction::make(),

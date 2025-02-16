@@ -27,6 +27,7 @@ class CreateOrder
                 'product_id' => $cartItem->product_id,
                 'quantity' => $cartItem->quantity,
                 'price' => $cartItem->product->price->getAmount(),
+                'subtotal' => $cartItem->product->price->multiply($cartItem->quantity)->getAmount(),
             ]);
 
             $removeAction->remove($cartItem->id);
