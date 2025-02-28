@@ -2,9 +2,9 @@
     'products'
 ])
 
-<div class="font-Poppins text-primaryBlack relative z-0">
-    <h1 class="text-4xl text-center mb-4 font-medium">Products</h1>
-    <p class="text-center text-lg text-[#5E6E89] font-medium mb-16">Order it for you or for your beloved ones </p>
+<div class="font-Poppins text-primaryBlack relative z-0 px-4">
+    <h1 class="text-2xl lg:text-4xl text-center mb-4 font-medium">Products</h1>
+    <p class="text-center lg:text-lg text-[#5E6E89] font-medium mb-16">Order it for you or for your beloved ones </p>
     <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-[120px] gap-8 z-0">
         @foreach($products as $product)
             <x-product :product="$product"/>

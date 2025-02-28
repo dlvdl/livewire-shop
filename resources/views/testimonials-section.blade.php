@@ -1,7 +1,7 @@
-<div class="h-full font-Poppins">
-    <h2 class="text-center font-medium text-4xl pb-2">Testimonials</h2>
+<div class="h-full font-Poppins px-4">
+    <h2 class="text-center font-medium text-2xl lg:text-4xl pb-2 pt-4">Testimonials</h2>
     <p class="text-center text-[#5E6E89]">Some quotes from our happy customers</p>
-    <div class="grid grid-cols-3 grid-rows-[295px] mt-7 gap-6">
+    <div class="grid lg:grid-cols-3 grid-rows-[295px] mt-7 gap-6">
         <x-testimonial-card
             :user="[
                  'name' => 'Luisa',

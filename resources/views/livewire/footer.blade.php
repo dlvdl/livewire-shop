@@ -1,7 +1,7 @@
 <div class="w-full h-full max-w-2xl px-6 lg:max-w-7xl mx-auto font-Poppins">
     <div class="text-primaryWhite pt-[60px] pb-[100px]">
         <div class="w-full h-0.5 bg-[#E1E1E1] rounded-full"></div>
-        <div class="grid grid-cols-[min-content_1fr] justify-items-stretch">
+        <div class="grid  lg:grid-cols-[min-content_1fr] justify-items-stretch">
             <div>
                 <svg class="h-[100px]">
                     <use xlink:href="/icons.svg#logo-footer"></use>
@@ -12,7 +12,7 @@
             </div>
 
             <div class="flex justify-end">
-                <nav class="w-full lg:w-[80%] gap-4 grid grid-cols-3 pt-[50px] justify-self-end">
+                <nav class="w-full lg:w-[80%] gap-4 grid md:grid-cols-3 pt-[50px] justify-self-end">
                     <ul class="font-medium space-y-4 text-[#E1E1E1]">
                         <li class="text-primaryGreen font-normal mb-6">Discovery</li>
                         <li>
