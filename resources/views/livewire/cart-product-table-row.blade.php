@@ -24,9 +24,13 @@
         </div>
     </td>
     <td>{{ $item->product->price }}</td>
-    <td class="text-center">
-        <div class="flex justify-center">
-            <div class="w-[75px]">
+    <td class="text-center" :style="{
+                        width: quantity > 99 ? '116px' :
+                        quantity > 9 ? '100px' :
+                        '75px'
+                    }">
+        <div class="flex justify-center w-full">
+            <div>
                 <x-quantity-selector x-model="quantity"/>
             </div>
         </div>
