@@ -13,15 +13,15 @@
     <div class="flex justify-center">
         <div class="w-full">
             @if(count($cartItems) > 0)
-                <div class="w-full hidden md:flex px-4">
+                <div class="w-full flex px-4">
                     <table class="w-full">
                         <thead>
-                        <tr class="font-Roboto font-medium">
-                            <td class="text-start py-4">Product</td>
-                            <td class="py-4">Price</td>
-                            <td class="text-center py-4">Quantity</td>
-                            <td class="text-end py-4">Total</td>
-                        </tr>
+                            <tr class="font-Roboto font-medium">
+                                <td class="text-start py-4 hidden md:table-cell">Product</td>
+                                <td class="py-4 hidden md:table-cell">Price</td>
+                                <td class="text-center py-4 hidden md:table-cell">Quantity</td>
+                                <td class="text-end py-4 hidden md:table-cell">Total</td>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach($cartItems as $cartItem)
@@ -30,13 +30,6 @@
                         </tbody>
                     </table>
                 </div>
-
-                <div class="w-full md:hidden flex flex-col justify-center gap-4 px-4 divide-y">
-                    @foreach($cartItems as $cartItem)
-                        <livewire:cart-product-card :item="$cartItem" :key="$cartItem->id . 'card'"/>
-                    @endforeach
-                </div>
-
                 <livewire:cart-product-total/>
             @endif
         </div>
